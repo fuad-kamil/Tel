@@ -6,6 +6,7 @@ ENV PYTHONUNBUFFERED=1
 # Install system dependencies (ffmpeg and others if needed)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg \
+    nodejs \
     && rm -rf /var/lib/apt/lists/*
 
 # Set up a new user named "user" with user ID 1000

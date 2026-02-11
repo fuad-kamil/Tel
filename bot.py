@@ -51,7 +51,17 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     ydl_opts = {
         'outtmpl': '%(title)s.%(ext)s',
         'noplaylist': True,
+        'verbose': True, # Enable verbose logging to see what's happening
     }
+    
+    # Check for cookies.txt
+    if os.path.exists('cookies.txt'):
+        print(f"FOUND cookies.txt! Size: {os.path.getsize('cookies.txt')} bytes")
+        ydl_opts['cookiefile'] = 'cookies.txt'
+    else:
+        print("WARNING: cookies.txt NOT FOUND in current directory.")
+        # List files to help debug
+        print(f"Current directory files: {os.listdir('.')}")
 
     if format_choice == '360':
         ydl_opts['format'] = 'best[height<=360]'
