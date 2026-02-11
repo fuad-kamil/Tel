@@ -4,6 +4,30 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, MessageHandler, CallbackQueryHandler, filters
 from dotenv import load_dotenv
 import yt_dlp
+import subprocess
+
+# --- SYSTEM DIAGNOSTICS ---
+print("\n" + "="*30)
+print("   BOT VERSION: 3.0 (DEBUG)   ")
+print("="*30)
+
+# Check Node.js
+try:
+    node_version = subprocess.check_output(["node", "-v"]).decode().strip()
+    print(f"✅ Node.js found: {node_version}")
+except FileNotFoundError:
+    print("❌ Node.js NOT found! (YouTube might block us)")
+
+# Check cookies.txt
+if os.path.exists("cookies.txt"):
+    size = os.path.getsize("cookies.txt")
+    print(f"✅ cookies.txt found! Size: {size} bytes")
+else:
+    print("❌ cookies.txt NOT found in root directory!")
+    print(f"Files in current dir: {os.listdir('.')}")
+
+print("="*30 + "\n")
+# --------------------------
 
 load_dotenv()
 
