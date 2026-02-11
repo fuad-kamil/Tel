@@ -3,8 +3,12 @@ FROM python:3.11-slim
 # Ensure output is sent directly to terminal (no buffering)
 ENV PYTHONUNBUFFERED=1
 
-# Install system dependencies (ffmpeg and others if needed)
+# Install system dependencies
+# git: required for installing yt-dlp from source
+# ffmpeg: required for audio conversion
+# nodejs: required for yt-dlp to bypass some checks
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
     ffmpeg \
     nodejs \
     && rm -rf /var/lib/apt/lists/*
@@ -27,7 +31,8 @@ USER user
 ENV HOME=/home/user \
     PATH=/home/user/.local/bin:$PATH
 
-# Hugging Face expects the app to run on port 7860
-ENV PORT=7860
+# Standard port for Koyeb/Render
+ENV PORT=8000
+EXPOSE 8000
 
 CMD ["python", "bot.py"]
