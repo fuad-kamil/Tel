@@ -174,7 +174,7 @@ if __name__ == '__main__':
             self.wfile.write(b"Bot is runnning!")
 
     def start_web_server():
-        port = int(os.environ.get('PORT', 8080))
+        port = int(os.environ.get('PORT', 8000))
         # Bind to 0.0.0.0 to be accessible externally
         server = HTTPServer(('0.0.0.0', port), HealthCheckHandler)
         print(f"Starting dummy web server on port {port}")
